@@ -1,2 +1,117 @@
 # donthi-hub.lua
-Script 
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "🍀 DONTHI HUB",
+   LoadingTitle = "DONTHI HUB",
+   LoadingSubtitle = "Black Edition 2026",
+   Theme = "Dark",
+   ShowText = "Donthi Hub"
+})
+
+Rayfield:Notify({
+   Title = "✅ Hub Cargado",
+   Content = "Bienvenido a DONTHI HUB",
+   Duration = 4
+})
+
+-- VARIABLES
+local CombatMode = false
+local AutoMode = false
+local KnifeMode = false
+
+-- ⚔️ COMBAT
+local Combat = Window:CreateTab("⚔️ Combat")
+
+Combat:CreateToggle({
+   Name = "Modo Combate",
+   CurrentValue = false,
+   Callback = function(v)
+      CombatMode = v
+      Rayfield:Notify({
+         Title = "Combat",
+         Content = v and "Activado" or "Desactivado",
+         Duration = 3
+      })
+   end
+})
+
+Combat:CreateToggle({
+   Name = "Auto Acción",
+   CurrentValue = false,
+   Callback = function(v)
+      AutoMode = v
+      Rayfield:Notify({
+         Title = "Auto Acción",
+         Content = v and "Activado" or "Desactivado",
+         Duration = 3
+      })
+   end
+})
+
+Combat:CreateToggle({
+   Name = "Modo Cuchillo",
+   CurrentValue = false,
+   Callback = function(v)
+      KnifeMode = v
+      Rayfield:Notify({
+         Title = "Knife Mode",
+         Content = v and "Activado" or "Desactivado",
+         Duration = 3
+      })
+   end
+})
+
+-- 👁️ VISUAL
+local Visual = Window:CreateTab("👁️ Visual")
+
+Visual:CreateToggle({
+   Name = "Full Bright",
+   CurrentValue = false,
+   Callback = function(v)
+      if v then
+         game.Lighting.Brightness = 5
+      else
+         game.Lighting.Brightness = 2
+      end
+   end
+})
+
+Visual:CreateDropdown({
+   Name = "Color Tema",
+   Options = {"Rojo","Verde","Azul","Amarillo","Morado","Blanco"},
+   CurrentOption = "Rojo",
+   Callback = function(color)
+      Rayfield:Notify({
+         Title = "Tema",
+         Content = "Color → "..color,
+         Duration = 3
+      })
+   end
+})
+
+-- ⚙️ MISC
+local Misc = Window:CreateTab("⚙️ Misc")
+
+Misc:CreateButton({
+   Name = "Reset Personaje",
+   Callback = function()
+      game.Players.LocalPlayer.Character:BreakJoints()
+   end
+})
+
+Misc:CreateSlider({
+   Name = "Velocidad",
+   Range = {16, 100},
+   Increment = 1,
+   CurrentValue = 16,
+   Callback = function(v)
+      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+   end
+})
+
+Rayfield:Notify({
+   Title = "DONTHI HUB",
+   Content = "Todo listo 🚀",
+   Duration = 5
+})
